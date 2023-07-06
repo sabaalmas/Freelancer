@@ -1,0 +1,6 @@
+{
+  "status": "error",
+  "message": "The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.",
+  "error_code": "RestExceptionCodes.GENERAL",
+  "request_id": "d6d02eeb743ac15f78123afb33027e41"
+}

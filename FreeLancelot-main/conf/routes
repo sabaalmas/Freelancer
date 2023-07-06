@@ -1,0 +1,32 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+GET     /favicon.ico    controllers.Assets.at(path="/public/images", file="favicon.png")
+# An example controller showing a sample home page
+GET     /                           controllers.FreelancerController.fetchempty
+# An example controller showing how to use dependency injection
+#GET     /count                      controllers.CountController.count
+# An example controller showing how to write asynchronous code
+#GET     /message                    controllers.AsyncController.message
+# An example controller showing how to write asynchronous code
+#GET     /listProjects                    controllers.FreelancerController.search(request: Request)
+#+nocsrf
+#POST     /listProjects                    controllers.FreelancerController.search2(request: Request)
+GET      /listResults                 controllers.FreelancerController.listAll
+GET       /forSkills                    controllers.FreelancerController.listSkillProjects(skillname:String)
+GET      /skills/:skillname/:id                  controllers.FreelancerController.fetchProjectsForSkill(skillname:String,id : String)
+GET      /:keyword                   controllers.FreelancerController.fetch(keyword : String)
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file                controllers.Assets.versioned(path="/public", file: Asset)
+#global word stats
+GET     /globalwordstatistics/:searchedKeywords          controllers.FreelancerController.globalWordStatistics(searchedKeywords:String)
+
+#individual word stats
+GET     /individualwordstatistics/:searchedKeywords/:previewDescription         controllers.FreelancerController.individualWordStatistics(searchedKeywords:String, previewDescription:String)
+#individual flesch readability index
+GET     /flesch_Readablitiy_Index/:previewDescription         controllers.FreelancerController.singleReadabilityScore(previewDescription:String)
+#global flesch readability index
+GET     /global_flesch_Readablitiy_Index/:keyword          controllers.FreelancerController.averageFleschIndex(keyword:String)
+
+#user profile and user projects
+GET     /userInformation/:ownerId          controllers.FreelancerController.userInformation(ownerId:String)

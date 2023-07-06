@@ -1,0 +1,249 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > ReverseAssets</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">controllers.javascript</a>
+</div>
+
+<h1>Coverage Summary for Class: ReverseAssets (controllers.javascript)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ReverseAssets</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/11)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;// @GENERATOR:play-routes-compiler
+<i class="no-highlight">2</i>&nbsp;// @SOURCE:conf/routes
+<i class="no-highlight">3</i>&nbsp;
+<i class="no-highlight">4</i>&nbsp;import play.api.routing.JavaScriptReverseRoute
+<i class="no-highlight">5</i>&nbsp;
+<i class="no-highlight">6</i>&nbsp;
+<i class="no-highlight">7</i>&nbsp;import _root_.controllers.Assets.Asset
+<i class="no-highlight">8</i>&nbsp;import _root_.play.libs.F
+<i class="no-highlight">9</i>&nbsp;
+<i class="no-highlight">10</i>&nbsp;// @LINE:4
+<i class="no-highlight">11</i>&nbsp;package controllers.javascript {
+<i class="no-highlight">12</i>&nbsp;
+<i class="no-highlight">13</i>&nbsp;  // @LINE:4
+<b class="nc"><i class="no-highlight">14</i>&nbsp;  class ReverseAssets(_prefix: =&gt; String) {</b>
+<i class="no-highlight">15</i>&nbsp;
+<i class="no-highlight">16</i>&nbsp;    def _defaultPrefix: String = {
+<b class="nc"><i class="no-highlight">17</i>&nbsp;      if (_prefix.endsWith(&quot;/&quot;)) &quot;&quot; else &quot;/&quot;</b>
+<i class="no-highlight">18</i>&nbsp;    }
+<i class="no-highlight">19</i>&nbsp;
+<i class="no-highlight">20</i>&nbsp;  
+<i class="no-highlight">21</i>&nbsp;    // @LINE:4
+<b class="nc"><i class="no-highlight">22</i>&nbsp;    def at: JavaScriptReverseRoute = JavaScriptReverseRoute(</b>
+<b class="nc"><i class="no-highlight">23</i>&nbsp;      &quot;controllers.Assets.at&quot;,</b>
+<b class="nc"><i class="no-highlight">24</i>&nbsp;      &quot;&quot;&quot;</b>
+<i class="no-highlight">25</i>&nbsp;        function() {
+<b class="nc"><i class="no-highlight">26</i>&nbsp;          return _wA({method:&quot;GET&quot;, url:&quot;&quot;&quot;&quot; + _prefix + { _defaultPrefix } + &quot;&quot;&quot;&quot; + &quot;favicon.ico&quot;})</b>
+<i class="no-highlight">27</i>&nbsp;        }
+<i class="no-highlight">28</i>&nbsp;      &quot;&quot;&quot;
+<i class="no-highlight">29</i>&nbsp;    )
+<i class="no-highlight">30</i>&nbsp;  
+<i class="no-highlight">31</i>&nbsp;    // @LINE:20
+<b class="nc"><i class="no-highlight">32</i>&nbsp;    def versioned: JavaScriptReverseRoute = JavaScriptReverseRoute(</b>
+<b class="nc"><i class="no-highlight">33</i>&nbsp;      &quot;controllers.Assets.versioned&quot;,</b>
+<b class="nc"><i class="no-highlight">34</i>&nbsp;      &quot;&quot;&quot;</b>
+<i class="no-highlight">35</i>&nbsp;        function(file1) {
+<b class="nc"><i class="no-highlight">36</i>&nbsp;          return _wA({method:&quot;GET&quot;, url:&quot;&quot;&quot;&quot; + _prefix + { _defaultPrefix } + &quot;&quot;&quot;&quot; + &quot;assets/&quot; + (&quot;&quot;&quot; + implicitly[play.api.mvc.PathBindable[Asset]].javascriptUnbind + &quot;&quot;&quot;)(&quot;file&quot;, file1)})</b>
+<i class="no-highlight">37</i>&nbsp;        }
+<i class="no-highlight">38</i>&nbsp;      &quot;&quot;&quot;
+<i class="no-highlight">39</i>&nbsp;    )
+<i class="no-highlight">40</i>&nbsp;  
+<i class="no-highlight">41</i>&nbsp;  }
+<i class="no-highlight">42</i>&nbsp;
+<i class="no-highlight">43</i>&nbsp;  // @LINE:6
+<b class="nc"><i class="no-highlight">44</i>&nbsp;  class ReverseFreelancerController(_prefix: =&gt; String) {</b>
+<i class="no-highlight">45</i>&nbsp;
+<i class="no-highlight">46</i>&nbsp;    def _defaultPrefix: String = {
+<i class="no-highlight">47</i>&nbsp;      if (_prefix.endsWith(&quot;/&quot;)) &quot;&quot; else &quot;/&quot;
+<i class="no-highlight">48</i>&nbsp;    }
+<i class="no-highlight">49</i>&nbsp;
+<i class="no-highlight">50</i>&nbsp;  
+<i class="no-highlight">51</i>&nbsp;    // @LINE:16
+<i class="no-highlight">52</i>&nbsp;    def listSkillProjects: JavaScriptReverseRoute = JavaScriptReverseRoute(
+<i class="no-highlight">53</i>&nbsp;      &quot;controllers.FreelancerController.listSkillProjects&quot;,
+<i class="no-highlight">54</i>&nbsp;      &quot;&quot;&quot;
+<i class="no-highlight">55</i>&nbsp;        function(skillname0) {
+<i class="no-highlight">56</i>&nbsp;          return _wA({method:&quot;GET&quot;, url:&quot;&quot;&quot;&quot; + _prefix + { _defaultPrefix } + &quot;&quot;&quot;&quot; + &quot;forSkills&quot; + _qS([(&quot;&quot;&quot; + implicitly[play.api.mvc.QueryStringBindable[String]].javascriptUnbind + &quot;&quot;&quot;)(&quot;skillname&quot;, skillname0)])})
+<i class="no-highlight">57</i>&nbsp;        }
+<i class="no-highlight">58</i>&nbsp;      &quot;&quot;&quot;
+<i class="no-highlight">59</i>&nbsp;    )
+<i class="no-highlight">60</i>&nbsp;  
+<i class="no-highlight">61</i>&nbsp;    // @LINE:17
+<i class="no-highlight">62</i>&nbsp;    def fetchProjectsForSkill: JavaScriptReverseRoute = JavaScriptReverseRoute(
+<i class="no-highlight">63</i>&nbsp;      &quot;controllers.FreelancerController.fetchProjectsForSkill&quot;,
+<i class="no-highlight">64</i>&nbsp;      &quot;&quot;&quot;
+<i class="no-highlight">65</i>&nbsp;        function(skillname0,id1) {
+<i class="no-highlight">66</i>&nbsp;          return _wA({method:&quot;GET&quot;, url:&quot;&quot;&quot;&quot; + _prefix + { _defaultPrefix } + &quot;&quot;&quot;&quot; + &quot;skills/&quot; + encodeURIComponent((&quot;&quot;&quot; + implicitly[play.api.mvc.PathBindable[String]].javascriptUnbind + &quot;&quot;&quot;)(&quot;skillname&quot;, skillname0)) + &quot;/&quot; + encodeURIComponent((&quot;&quot;&quot; + implicitly[play.api.mvc.PathBindable[String]].javascriptUnbind + &quot;&quot;&quot;)(&quot;id&quot;, id1))})
+<i class="no-highlight">67</i>&nbsp;        }
+<i class="no-highlight">68</i>&nbsp;      &quot;&quot;&quot;
+<i class="no-highlight">69</i>&nbsp;    )
+<i class="no-highlight">70</i>&nbsp;  
+<i class="no-highlight">71</i>&nbsp;    // @LINE:18
+<i class="no-highlight">72</i>&nbsp;    def fetch: JavaScriptReverseRoute = JavaScriptReverseRoute(
+<i class="no-highlight">73</i>&nbsp;      &quot;controllers.FreelancerController.fetch&quot;,
+<i class="no-highlight">74</i>&nbsp;      &quot;&quot;&quot;
+<i class="no-highlight">75</i>&nbsp;        function(keyword0) {
+<i class="no-highlight">76</i>&nbsp;          return _wA({method:&quot;GET&quot;, url:&quot;&quot;&quot;&quot; + _prefix + { _defaultPrefix } + &quot;&quot;&quot;&quot; + encodeURIComponent((&quot;&quot;&quot; + implicitly[play.api.mvc.PathBindable[String]].javascriptUnbind + &quot;&quot;&quot;)(&quot;keyword&quot;, keyword0))})
+<i class="no-highlight">77</i>&nbsp;        }
+<i class="no-highlight">78</i>&nbsp;      &quot;&quot;&quot;
+<i class="no-highlight">79</i>&nbsp;    )
+<i class="no-highlight">80</i>&nbsp;  
+<i class="no-highlight">81</i>&nbsp;    // @LINE:29
+<i class="no-highlight">82</i>&nbsp;    def averageFleschIndex: JavaScriptReverseRoute = JavaScriptReverseRoute(
+<i class="no-highlight">83</i>&nbsp;      &quot;controllers.FreelancerController.averageFleschIndex&quot;,
+<i class="no-highlight">84</i>&nbsp;      &quot;&quot;&quot;
+<i class="no-highlight">85</i>&nbsp;        function(keyword0) {
+<i class="no-highlight">86</i>&nbsp;          return _wA({method:&quot;GET&quot;, url:&quot;&quot;&quot;&quot; + _prefix + { _defaultPrefix } + &quot;&quot;&quot;&quot; + &quot;global_flesch_Readablitiy_Index/&quot; + encodeURIComponent((&quot;&quot;&quot; + implicitly[play.api.mvc.PathBindable[String]].javascriptUnbind + &quot;&quot;&quot;)(&quot;keyword&quot;, keyword0))})
+<i class="no-highlight">87</i>&nbsp;        }
+<i class="no-highlight">88</i>&nbsp;      &quot;&quot;&quot;
+<i class="no-highlight">89</i>&nbsp;    )
+<i class="no-highlight">90</i>&nbsp;  
+<i class="no-highlight">91</i>&nbsp;    // @LINE:25
+<i class="no-highlight">92</i>&nbsp;    def individualWordStatistics: JavaScriptReverseRoute = JavaScriptReverseRoute(
+<i class="no-highlight">93</i>&nbsp;      &quot;controllers.FreelancerController.individualWordStatistics&quot;,
+<i class="no-highlight">94</i>&nbsp;      &quot;&quot;&quot;
+<i class="no-highlight">95</i>&nbsp;        function(searchedKeywords0,previewDescription1) {
+<i class="no-highlight">96</i>&nbsp;          return _wA({method:&quot;GET&quot;, url:&quot;&quot;&quot;&quot; + _prefix + { _defaultPrefix } + &quot;&quot;&quot;&quot; + &quot;individualwordstatistics/&quot; + encodeURIComponent((&quot;&quot;&quot; + implicitly[play.api.mvc.PathBindable[String]].javascriptUnbind + &quot;&quot;&quot;)(&quot;searchedKeywords&quot;, searchedKeywords0)) + &quot;/&quot; + encodeURIComponent((&quot;&quot;&quot; + implicitly[play.api.mvc.PathBindable[String]].javascriptUnbind + &quot;&quot;&quot;)(&quot;previewDescription&quot;, previewDescription1))})
+<i class="no-highlight">97</i>&nbsp;        }
+<i class="no-highlight">98</i>&nbsp;      &quot;&quot;&quot;
+<i class="no-highlight">99</i>&nbsp;    )
+<i class="no-highlight">100</i>&nbsp;  
+<i class="no-highlight">101</i>&nbsp;    // @LINE:15
+<i class="no-highlight">102</i>&nbsp;    def listAll: JavaScriptReverseRoute = JavaScriptReverseRoute(
+<i class="no-highlight">103</i>&nbsp;      &quot;controllers.FreelancerController.listAll&quot;,
+<i class="no-highlight">104</i>&nbsp;      &quot;&quot;&quot;
+<i class="no-highlight">105</i>&nbsp;        function() {
+<i class="no-highlight">106</i>&nbsp;          return _wA({method:&quot;GET&quot;, url:&quot;&quot;&quot;&quot; + _prefix + { _defaultPrefix } + &quot;&quot;&quot;&quot; + &quot;listResults&quot;})
+<i class="no-highlight">107</i>&nbsp;        }
+<i class="no-highlight">108</i>&nbsp;      &quot;&quot;&quot;
+<i class="no-highlight">109</i>&nbsp;    )
+<i class="no-highlight">110</i>&nbsp;  
+<i class="no-highlight">111</i>&nbsp;    // @LINE:6
+<i class="no-highlight">112</i>&nbsp;    def fetchempty: JavaScriptReverseRoute = JavaScriptReverseRoute(
+<i class="no-highlight">113</i>&nbsp;      &quot;controllers.FreelancerController.fetchempty&quot;,
+<i class="no-highlight">114</i>&nbsp;      &quot;&quot;&quot;
+<i class="no-highlight">115</i>&nbsp;        function() {
+<i class="no-highlight">116</i>&nbsp;          return _wA({method:&quot;GET&quot;, url:&quot;&quot;&quot;&quot; + _prefix + &quot;&quot;&quot;&quot;})
+<i class="no-highlight">117</i>&nbsp;        }
+<i class="no-highlight">118</i>&nbsp;      &quot;&quot;&quot;
+<i class="no-highlight">119</i>&nbsp;    )
+<i class="no-highlight">120</i>&nbsp;  
+<i class="no-highlight">121</i>&nbsp;    // @LINE:22
+<i class="no-highlight">122</i>&nbsp;    def globalWordStatistics: JavaScriptReverseRoute = JavaScriptReverseRoute(
+<i class="no-highlight">123</i>&nbsp;      &quot;controllers.FreelancerController.globalWordStatistics&quot;,
+<i class="no-highlight">124</i>&nbsp;      &quot;&quot;&quot;
+<i class="no-highlight">125</i>&nbsp;        function(searchedKeywords0) {
+<i class="no-highlight">126</i>&nbsp;          return _wA({method:&quot;GET&quot;, url:&quot;&quot;&quot;&quot; + _prefix + { _defaultPrefix } + &quot;&quot;&quot;&quot; + &quot;globalwordstatistics/&quot; + encodeURIComponent((&quot;&quot;&quot; + implicitly[play.api.mvc.PathBindable[String]].javascriptUnbind + &quot;&quot;&quot;)(&quot;searchedKeywords&quot;, searchedKeywords0))})
+<i class="no-highlight">127</i>&nbsp;        }
+<i class="no-highlight">128</i>&nbsp;      &quot;&quot;&quot;
+<i class="no-highlight">129</i>&nbsp;    )
+<i class="no-highlight">130</i>&nbsp;  
+<i class="no-highlight">131</i>&nbsp;    // @LINE:27
+<i class="no-highlight">132</i>&nbsp;    def singleReadabilityScore: JavaScriptReverseRoute = JavaScriptReverseRoute(
+<i class="no-highlight">133</i>&nbsp;      &quot;controllers.FreelancerController.singleReadabilityScore&quot;,
+<i class="no-highlight">134</i>&nbsp;      &quot;&quot;&quot;
+<i class="no-highlight">135</i>&nbsp;        function(previewDescription0) {
+<i class="no-highlight">136</i>&nbsp;          return _wA({method:&quot;GET&quot;, url:&quot;&quot;&quot;&quot; + _prefix + { _defaultPrefix } + &quot;&quot;&quot;&quot; + &quot;flesch_Readablitiy_Index/&quot; + encodeURIComponent((&quot;&quot;&quot; + implicitly[play.api.mvc.PathBindable[String]].javascriptUnbind + &quot;&quot;&quot;)(&quot;previewDescription&quot;, previewDescription0))})
+<i class="no-highlight">137</i>&nbsp;        }
+<i class="no-highlight">138</i>&nbsp;      &quot;&quot;&quot;
+<i class="no-highlight">139</i>&nbsp;    )
+<i class="no-highlight">140</i>&nbsp;  
+<i class="no-highlight">141</i>&nbsp;  }
+<i class="no-highlight">142</i>&nbsp;
+<i class="no-highlight">143</i>&nbsp;
+<i class="no-highlight">144</i>&nbsp;}
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-03-17 23:13</div>
+</div>
+</body>
+</html>

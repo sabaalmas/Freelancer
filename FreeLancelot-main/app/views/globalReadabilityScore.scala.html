@@ -1,0 +1,95 @@
+@(ReadabilityScore: HashMap[String, String], keyword : String)
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        @* Individual preview description readability index values *@
+    <title>"Freelancelot"</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <!--loader -->
+<style>
+body {
+  font-family: Arial;
+}
+
+p {
+text-align: center;
+}
+
+.blockFormat
+{
+	margin: auto; 
+	width: 80%;
+}
+.lineFormat
+{
+	background-color:#EDEDED;
+	width: 80%;
+	text-align:center;
+	font-size:15px;
+	font-weight: bold;
+	padding-top: 7px;
+	padding-bottom: 5px;
+	margin:auto
+}
+
+.width60per
+{
+	width: 60%;
+}
+
+.width75per
+{
+	width: 60%;
+}
+
+.width25per
+{
+	width: 60%;
+}
+
+.marginAuto
+{
+  margin: auto;
+}
+.textAlignCenter
+{
+	text-align:center;
+}
+</style>
+
+    </head>
+<body>
+<br>
+<br>
+<div class="blockFormat">
+	<div class="lineFormat">
+    <p>Global Flesch readability index for : @keyword  </p>
+  </div>   
+<br>
+<br>
+<div class="width60per marginAuto">
+	 @if(ReadabilityScore != null) {
+		<table class="table table-hover blockFormat">
+			<tr>
+				<th class="width75per">Properties</th>
+				<th class="width25per">Value</th>
+			</tr>
+			@for((key, value) <- ReadabilityScore) {
+			<tr>
+				<td class="width75per">@key</td>
+				<td class="width25per">@value</td>
+			</tr>
+			}
+		</table>
+		}else {
+		<table class="table table-hover blockFormat">
+		<tr>
+				<th class="width75per textAlignCenter">No readability index to show</th>
+			</tr>
+    }
+		</div>
+</div>
+</body>
+
+</html>

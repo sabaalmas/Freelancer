@@ -1,0 +1,33 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+GET     /favicon.ico    controllers.Assets.at(path="/public/images", file="favicon.png")
+# An example controller showing a sample home page
+
+
+GET     /                               controllers.WebSocketController.fetchempty(request :Request)
+GET     /websocket                      controllers.WebSocketController.websocket
+GET     /websocketSkill                      controllers.WebSocketController.websocketSkill
+
+
+
+
+GET       /forSkills                    controllers.WebSocketController.listSkillProjects(skillname:String,skillId:String)
+GET      /skills/:skillname/:id                  controllers.WebSocketController.fetchProjectsForSkill(request:Request,skillname:String,id : String)
+GET     /:keyword                       controllers.WebSocketController.fetch(keyword : String)
+
+#global word stats
+GET     /globalwordstatistics/:searchedKeywords          controllers.WebSocketController.globalWordStatistics(searchedKeywords:String)
+
+#individual word stats
+GET     /individualwordstatistics/:searchedKeywords/:previewDescription         controllers.WebSocketController.individualWordStatistics(searchedKeywords:String, previewDescription:String)
+#individual flesch readability index
+GET     /flesch_Readablitiy_Index/:previewDescription         controllers.WebSocketController.singleReadabilityScore(previewDescription:String)
+#global flesch readability index
+GET     /global_flesch_Readablitiy_Index/:keyword          controllers.WebSocketController.averageFleschIndex(keyword:String)
+
+#user profile and user projects
+GET     /userInformation/:ownerId          controllers.WebSocketController.userInformation(ownerId:String)
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file                controllers.Assets.versioned(path="/public", file: Asset)

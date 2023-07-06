@@ -1,0 +1,215 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > FreelancerController</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">controllers</a>
+</div>
+
+<h1>Coverage Summary for Class: FreelancerController (controllers)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">FreelancerController</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/30)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package controllers;
+<i class="no-highlight">2</i>&nbsp;
+<i class="no-highlight">3</i>&nbsp;import akka.http.javadsl.model.HttpRequest;
+<i class="no-highlight">4</i>&nbsp;import model.ProjectInfo;
+<i class="no-highlight">5</i>&nbsp;import model.SearchResult;
+<i class="no-highlight">6</i>&nbsp;
+<i class="no-highlight">7</i>&nbsp;
+<i class="no-highlight">8</i>&nbsp;import play.i18n.MessagesApi;
+<i class="no-highlight">9</i>&nbsp;import play.data.Form;
+<i class="no-highlight">10</i>&nbsp;import play.data.FormFactory;
+<i class="no-highlight">11</i>&nbsp;import play.libs.concurrent.HttpExecutionContext;
+<i class="no-highlight">12</i>&nbsp;import play.mvc.Controller;
+<i class="no-highlight">13</i>&nbsp;import play.mvc.Http;
+<i class="no-highlight">14</i>&nbsp;import play.mvc.Result;
+<i class="no-highlight">15</i>&nbsp;
+<i class="no-highlight">16</i>&nbsp;import javax.inject.Inject;
+<i class="no-highlight">17</i>&nbsp;import java.util.ArrayList;
+<i class="no-highlight">18</i>&nbsp;import java.util.List;
+<i class="no-highlight">19</i>&nbsp;import java.util.concurrent.CompletableFuture;
+<i class="no-highlight">20</i>&nbsp;import java.util.concurrent.CompletionStage;
+<i class="no-highlight">21</i>&nbsp;import java.util.concurrent.ExecutionException;
+<i class="no-highlight">22</i>&nbsp;
+<i class="no-highlight">23</i>&nbsp;import services.FreeLancerService;
+<i class="no-highlight">24</i>&nbsp;import views.html.*;
+<i class="no-highlight">25</i>&nbsp;
+<i class="no-highlight">26</i>&nbsp;public class FreelancerController extends Controller {
+<i class="no-highlight">27</i>&nbsp;    /**
+<i class="no-highlight">28</i>&nbsp;     * Search form page (GET page)
+<i class="no-highlight">29</i>&nbsp;     * Displays the form
+<i class="no-highlight">30</i>&nbsp;     * @return CompletionStage of SearchResult
+<i class="no-highlight">31</i>&nbsp;     */
+<i class="no-highlight">32</i>&nbsp;
+<i class="no-highlight">33</i>&nbsp;    private FreeLancerService freeLancerService;
+<i class="no-highlight">34</i>&nbsp;    private Form form;
+<i class="no-highlight">35</i>&nbsp;    private MessagesApi messsage;
+<i class="no-highlight">36</i>&nbsp;    @Inject
+<i class="no-highlight">37</i>&nbsp;    FormFactory formFactory;
+<i class="no-highlight">38</i>&nbsp;    @Inject
+<b class="nc"><i class="no-highlight">39</i>&nbsp;    public FreelancerController(FreeLancerService freeLancerService, MessagesApi messagesApi) {</b>
+<i class="no-highlight">40</i>&nbsp;
+<b class="nc"><i class="no-highlight">41</i>&nbsp;        this.freeLancerService = freeLancerService;</b>
+<b class="nc"><i class="no-highlight">42</i>&nbsp;        this.messsage=messagesApi;</b>
+<i class="no-highlight">43</i>&nbsp;    }
+<i class="no-highlight">44</i>&nbsp;
+<i class="no-highlight">45</i>&nbsp;    public CompletableFuture&lt;Result&gt; fetch(String keyword) {
+<i class="no-highlight">46</i>&nbsp;
+<b class="nc"><i class="no-highlight">47</i>&nbsp;        System.out.println(&quot;Call is coming to backend fetch&quot;);</b>
+<b class="nc"><i class="no-highlight">48</i>&nbsp;        System.out.println(&quot;Keyword for Project Search is &quot;+ keyword);</b>
+<b class="nc"><i class="no-highlight">49</i>&nbsp;        List&lt;SearchResult&gt; filledProjects =null;</b>
+<i class="no-highlight">50</i>&nbsp;
+<b class="nc"><i class="no-highlight">51</i>&nbsp;        filledProjects= freeLancerService.getOrQuery(keyword);</b>
+<b class="nc"><i class="no-highlight">52</i>&nbsp;        System.out.println(&quot;Filled Project count :&quot;+ filledProjects.size());</b>
+<i class="no-highlight">53</i>&nbsp;        //return CompletableFuture.completedFuture(ok(views.html.index.render(filledProjects )));
+<b class="nc"><i class="no-highlight">54</i>&nbsp;        return CompletableFuture.completedFuture(ok());</b>
+<i class="no-highlight">55</i>&nbsp;        // return freeLancerService.search(&quot;Search&quot;).thenApplyAsync()
+<i class="no-highlight">56</i>&nbsp;    }
+<i class="no-highlight">57</i>&nbsp;
+<i class="no-highlight">58</i>&nbsp;    public CompletableFuture&lt;Result&gt; fetchempty() {
+<b class="nc"><i class="no-highlight">59</i>&nbsp;        System.out.println(&quot;Empty Call&quot;);</b>
+<b class="nc"><i class="no-highlight">60</i>&nbsp;        freeLancerService.clearResults();</b>
+<b class="nc"><i class="no-highlight">61</i>&nbsp;        return CompletableFuture.completedFuture(ok(views.html.index.render(null )));</b>
+<i class="no-highlight">62</i>&nbsp;
+<i class="no-highlight">63</i>&nbsp;    }
+<i class="no-highlight">64</i>&nbsp;
+<i class="no-highlight">65</i>&nbsp;    public CompletableFuture&lt;Result&gt; listAll() {
+<b class="nc"><i class="no-highlight">66</i>&nbsp;        System.out.println(&quot;Came to List All&quot;);</b>
+<b class="nc"><i class="no-highlight">67</i>&nbsp;        return CompletableFuture.completedFuture(ok(views.html.listResults.render(freeLancerService.listOfSearch)));</b>
+<i class="no-highlight">68</i>&nbsp;
+<i class="no-highlight">69</i>&nbsp;    }
+<i class="no-highlight">70</i>&nbsp;
+<i class="no-highlight">71</i>&nbsp;    public CompletableFuture&lt;Result&gt; fetchProjectsForSkill(String skillname,String id){
+<b class="nc"><i class="no-highlight">72</i>&nbsp;        System.out.println(&quot;Call is coming to Skill backend fetch&quot;);</b>
+<b class="nc"><i class="no-highlight">73</i>&nbsp;        System.out.println(&quot;Keyword for Skill Search is &quot;+ id);</b>
+<b class="nc"><i class="no-highlight">74</i>&nbsp;        List&lt;SearchResult&gt; filledProjects =null;</b>
+<i class="no-highlight">75</i>&nbsp;
+<b class="nc"><i class="no-highlight">76</i>&nbsp;        filledProjects= freeLancerService.projectsForSkill(id);</b>
+<b class="nc"><i class="no-highlight">77</i>&nbsp;        System.out.println(&quot;Filled Skills Project count :&quot;+ filledProjects.size());</b>
+<i class="no-highlight">78</i>&nbsp;        //return CompletableFuture.completedFuture(ok(views.html.index.render(filledProjects )));
+<b class="nc"><i class="no-highlight">79</i>&nbsp;        return CompletableFuture.completedFuture(redirect(routes.FreelancerController.listSkillProjects(skillname)));</b>
+<i class="no-highlight">80</i>&nbsp;    }
+<i class="no-highlight">81</i>&nbsp;
+<i class="no-highlight">82</i>&nbsp;    public CompletableFuture&lt;Result&gt; listSkillProjects(String skillname) {
+<b class="nc"><i class="no-highlight">83</i>&nbsp;        System.out.println(&quot;Came to List Skill All&quot;);</b>
+<b class="nc"><i class="no-highlight">84</i>&nbsp;        return CompletableFuture.completedFuture(ok(views.html.listResultsForSkill.render(skillname,freeLancerService.listOfSearchSkills )));</b>
+<i class="no-highlight">85</i>&nbsp;
+<i class="no-highlight">86</i>&nbsp;    }
+<i class="no-highlight">87</i>&nbsp;    
+<i class="no-highlight">88</i>&nbsp;    public CompletableFuture&lt;Result&gt; globalWordStatistics(String searchedKeywords) {
+<b class="nc"><i class="no-highlight">89</i>&nbsp;        System.out.println(&quot;Came to globalWordStatistics: &quot;+searchedKeywords);</b>
+<b class="nc"><i class="no-highlight">90</i>&nbsp;        return CompletableFuture.completedFuture(ok(views.html.wordStatistics.render(freeLancerService.globalWordStatistics(searchedKeywords),searchedKeywords,&quot;&quot;,true)));</b>
+<i class="no-highlight">91</i>&nbsp;
+<i class="no-highlight">92</i>&nbsp;    }
+<i class="no-highlight">93</i>&nbsp;    
+<i class="no-highlight">94</i>&nbsp;    public CompletableFuture&lt;Result&gt; individualWordStatistics(String searchedKeywords,String previewDescription) {
+<b class="nc"><i class="no-highlight">95</i>&nbsp;        System.out.println(&quot;Came to individualWordStatistics: &quot;+searchedKeywords+&quot; : &quot;+previewDescription);</b>
+<b class="nc"><i class="no-highlight">96</i>&nbsp;        return CompletableFuture.completedFuture(ok(views.html.wordStatistics.render(freeLancerService.individualWordStatistics(previewDescription),searchedKeywords,previewDescription,false)));</b>
+<i class="no-highlight">97</i>&nbsp;    }
+<i class="no-highlight">98</i>&nbsp;    
+<i class="no-highlight">99</i>&nbsp;    public CompletableFuture&lt;Result&gt; averageFleschIndex(String keyword) {
+<b class="nc"><i class="no-highlight">100</i>&nbsp;        System.out.println(&quot;Came to averageScoreCalculate: &quot;+keyword);</b>
+<b class="nc"><i class="no-highlight">101</i>&nbsp;       return CompletableFuture.completedFuture(ok(views.html.globalReadabilityScore.render(freeLancerService.averageScoreCalculate(keyword),keyword)));</b>
+<i class="no-highlight">102</i>&nbsp;
+<i class="no-highlight">103</i>&nbsp;    }
+<i class="no-highlight">104</i>&nbsp;    
+<i class="no-highlight">105</i>&nbsp;    public CompletableFuture&lt;Result&gt; singleReadabilityScore(String previewDescription) {
+<b class="nc"><i class="no-highlight">106</i>&nbsp;        System.out.println(&quot;Came to Readability Score : &quot;+&quot; : &quot;+previewDescription);</b>
+<b class="nc"><i class="no-highlight">107</i>&nbsp;        return CompletableFuture.completedFuture(ok(views.html.readabilityScore.render(freeLancerService.readbilityScoreCalculate(previewDescription),previewDescription)));</b>
+<i class="no-highlight">108</i>&nbsp;
+<i class="no-highlight">109</i>&nbsp;    }
+<i class="no-highlight">110</i>&nbsp;}
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-03-17 23:13</div>
+</div>
+</body>
+</html>

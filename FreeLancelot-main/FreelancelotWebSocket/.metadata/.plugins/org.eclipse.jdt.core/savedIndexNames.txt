@@ -1,0 +1,4 @@
+INDEX VERSION 1.131+C:\Users\14386\Downloads\FreeLancelot-main (1)\FreeLancelot-main\FreelancelotWebSocket\.metadata\.plugins\org.eclipse.jdt.core
+4044757637.index
+1196932493.index
+1865797976.index

@@ -1,0 +1,68 @@
+@(searchResults:List[model.SearchResult])
+
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        @* Here's where we render the page title `String`. *@
+    <title>"Freelancelot"</title>
+    <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/main.css")">
+    <link rel="shortcut icon" type="image/png" href="@routes.Assets.versioned("images/favicon.png")">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <!--loader -->
+
+    </head>
+<body>
+<div class="container">
+    <div class="jumbotron">
+        <h1 class="center">Welcome to Freelancelot!</h1>
+    </div>
+</div>
+<div class="center">
+    <input id="searchTerm" class="input-lg" type="text" placeholder="enter search term(s)"/>
+    <button id="goButton" type="button" class="btn btn-info" onclick="search(@searchResults.length)"><span class="glyphicon glyphicon-search"></span> Go</button>
+</div>
+<br><br><hr>
+
+    <div class="container">
+    @if(searchResults != null) {
+
+            @for(searchResult <- searchResults) {
+                <div class="row justify-content-md-center ">
+
+                <div class="col-md-8">
+                 <p> <b> Search terms :  @searchResult.getKeyword</b> &emsp;<a href="@routes.FreelancerController.globalWordStatistics(searchResult.getKeyword)" target="_blank">Global Stats</a>
+                  <b>&emsp;</b><a href="@routes.FreelancerController.averageFleschIndex(searchResult.getKeyword)" target="_blank"> Global Readability</a>  </p>
+                  <!-- <p>Total projects fetched: @searchResult.getSizeOfList</p>-->
+                </p>
+                   <!-- <p> <b> @searchResult.getKeyword </b></p>-->
+                   @for(project <- searchResult.getFirstTenProjectInfo){
+                       <p><b>Owner ID: </b> <a href="@routes.FreelancerController.userInformation(project.getOwnerId())" target="_blank"> @project.getOwnerId </a>  </b>@project.getTimeSubmitted </b><b>Title: </b>@project.getTitle </b><b>Type: </b>@project.getType </b><b>Skills :</b>                    @for(skill <- project.getSkills){
+                        @*<a href="" onclick="displaySkillResults(@skill.getJobID)">@skill.getSkillName</a>*@
+
+                        <a href="http://localhost:9000/skills/@skill.getSkillName/@skill.getJobID" target="_blank">@skill.getSkillName</a>
+
+                    }
+                   | <a href="@routes.FreelancerController.individualWordStatistics(searchResult.getKeyword,project.getPreviewDescription)" target="_blank"> Stats</a>
+                    | <a href="@routes.FreelancerController.singleReadabilityScore(project.getPreviewDescription)" target="_blank"> Readability</a>
+                </p>
+
+                }
+                </div>
+                </div>
+                <div class="divider py-1 bg-dark"><hr class="mt-5 mb-5"></div>
+            }
+
+        }
+    </div>
+
+
+
+    <script src="@routes.Assets.versioned("javascripts/jquery.js")" type="text/javascript"></script>
+    <script src="@routes.Assets.versioned("javascripts/freelancelot.js")" type="text/javascript"></script>
+    @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>*@
+</body>
+</html>
+

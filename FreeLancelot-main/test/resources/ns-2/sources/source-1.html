@@ -1,0 +1,193 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > readabilityScoreHelper</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">ReadibilityHelper</a>
+</div>
+
+<h1>Coverage Summary for Class: readabilityScoreHelper (ReadibilityHelper)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">readabilityScoreHelper</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/44)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package ReadibilityHelper;
+<i class="no-highlight">2</i>&nbsp;
+<i class="no-highlight">3</i>&nbsp;import java.util.List;
+<i class="no-highlight">4</i>&nbsp;
+<b class="nc"><i class="no-highlight">5</i>&nbsp;public class readabilityScoreHelper {</b>
+<i class="no-highlight">6</i>&nbsp;	
+<i class="no-highlight">7</i>&nbsp;	public static double countTotalSyllables(List&lt;String&gt; words) {
+<b class="nc"><i class="no-highlight">8</i>&nbsp;	    return words.stream()</b>
+<b class="nc"><i class="no-highlight">9</i>&nbsp;	    		.mapToDouble(readabilityScoreHelper::countSyllables)</b>
+<b class="nc"><i class="no-highlight">10</i>&nbsp;	    		.sum();</b>
+<i class="no-highlight">11</i>&nbsp;	  }
+<i class="no-highlight">12</i>&nbsp;	
+<i class="no-highlight">13</i>&nbsp;	static double countSyllables(String word) {
+<b class="nc"><i class="no-highlight">14</i>&nbsp;		  double count = 0.0;</b>
+<i class="no-highlight">15</i>&nbsp;	    // null or empty strings have no syllables
+<b class="nc"><i class="no-highlight">16</i>&nbsp;	    if (word == null || word.trim().isEmpty())</b>
+<b class="nc"><i class="no-highlight">17</i>&nbsp;	      return 0.0;</b>
+<i class="no-highlight">18</i>&nbsp;
+<i class="no-highlight">19</i>&nbsp;	    // words of three letters or shorter count as single syllables;
+<b class="nc"><i class="no-highlight">20</i>&nbsp;	    if (word.length()&lt;=3)</b>
+<b class="nc"><i class="no-highlight">21</i>&nbsp;	      return 1.0;</b>
+<i class="no-highlight">22</i>&nbsp;	    else 
+<b class="nc"><i class="no-highlight">23</i>&nbsp;	    	word = readabilityScoreHelper.ignoreLastSpCharacters(word);</b>
+<i class="no-highlight">24</i>&nbsp;	    
+<b class="nc"><i class="no-highlight">25</i>&nbsp;	    word = readabilityScoreHelper.removeConsecutiveVowels(word);</b>
+<i class="no-highlight">26</i>&nbsp;	    
+<b class="nc"><i class="no-highlight">27</i>&nbsp;	    for(char s:word.toCharArray())</b>
+<i class="no-highlight">28</i>&nbsp;	    {
+<b class="nc"><i class="no-highlight">29</i>&nbsp;	    	if (String.valueOf(s).matches(&quot;[aeiouAEIOUyY]&quot;))</b>
+<b class="nc"><i class="no-highlight">30</i>&nbsp;	    		count = count + 1;</b>
+<i class="no-highlight">31</i>&nbsp;	    }
+<i class="no-highlight">32</i>&nbsp;	    
+<b class="nc"><i class="no-highlight">33</i>&nbsp;	    return count;</b>
+<i class="no-highlight">34</i>&nbsp;	  }
+<i class="no-highlight">35</i>&nbsp;	
+<i class="no-highlight">36</i>&nbsp;	//-es, -ed and -e (except -le) endings are ignored
+<i class="no-highlight">37</i>&nbsp;		static String ignoreLastSpCharacters (String word) {
+<i class="no-highlight">38</i>&nbsp;			//System.out.println(word.matches(&quot;[a-zA-Z]+[^l]e$&quot;));
+<b class="nc"><i class="no-highlight">39</i>&nbsp;			if( (word.matches(&quot;[a-zA-Z]+[^l]e$&quot;) &amp;&amp; word.matches(&quot;[a-zA-Z]+e$&quot;)) || word.matches(&quot;[a-zA-Z]+es$&quot;) || word.matches(&quot;[a-zA-Z]+ed$&quot;) )</b>
+<i class="no-highlight">40</i>&nbsp;				{
+<b class="nc"><i class="no-highlight">41</i>&nbsp;				System.out.println(&quot;input &quot; + word );</b>
+<b class="nc"><i class="no-highlight">42</i>&nbsp;				if (word.matches(&quot;[a-zA-Z]+e$&quot;))</b>
+<b class="nc"><i class="no-highlight">43</i>&nbsp;					word = word.substring(0, word.length()-1);</b>
+<i class="no-highlight">44</i>&nbsp;				else
+<b class="nc"><i class="no-highlight">45</i>&nbsp;					word = word.substring(0, word.length()-2);</b>
+<i class="no-highlight">46</i>&nbsp;				}
+<i class="no-highlight">47</i>&nbsp;			//System.out.println(word);
+<b class="nc"><i class="no-highlight">48</i>&nbsp;			return word;	</b>
+<i class="no-highlight">49</i>&nbsp;		}
+<i class="no-highlight">50</i>&nbsp;		
+<i class="no-highlight">51</i>&nbsp;		//	  3.   consecutive vowels count as one syllable.
+<i class="no-highlight">52</i>&nbsp;		public static String removeConsecutiveVowels(String word) {
+<b class="nc"><i class="no-highlight">53</i>&nbsp;	        if(word.length()&lt;=1)</b>
+<b class="nc"><i class="no-highlight">54</i>&nbsp;	            return word;</b>
+<b class="nc"><i class="no-highlight">55</i>&nbsp;	        if(word.toUpperCase().charAt(0)==word.toUpperCase().charAt(1) &amp;&amp; String.valueOf(word.charAt(0)).matches(&quot;[aeiouAEIOUyY]&quot;))</b>
+<b class="nc"><i class="no-highlight">56</i>&nbsp;	            return removeConsecutiveVowels(word.substring(1));</b>
+<i class="no-highlight">57</i>&nbsp;	        else
+<b class="nc"><i class="no-highlight">58</i>&nbsp;	            return word.charAt(0) + removeConsecutiveVowels(word.substring(1));</b>
+<i class="no-highlight">59</i>&nbsp;	    }
+<i class="no-highlight">60</i>&nbsp;	
+<i class="no-highlight">61</i>&nbsp;	public static String computeLevel (Double index) {
+<b class="nc"><i class="no-highlight">62</i>&nbsp;		String result = &quot;&quot;;</b>
+<b class="nc"><i class="no-highlight">63</i>&nbsp;		if(index &gt; 0.0 &amp;&amp; index &lt; 10.0)</b>
+<b class="nc"><i class="no-highlight">64</i>&nbsp;			result = &quot;Professional&quot;;</b>
+<b class="nc"><i class="no-highlight">65</i>&nbsp;		else if(index &gt;= 10.0 &amp;&amp; index &lt; 30.0)</b>
+<b class="nc"><i class="no-highlight">66</i>&nbsp;			result = &quot;College graduate&quot;;</b>
+<b class="nc"><i class="no-highlight">67</i>&nbsp;		else if(index &gt;= 30.0 &amp;&amp; index &lt; 50.0)</b>
+<b class="nc"><i class="no-highlight">68</i>&nbsp;			result = &quot;College&quot;;</b>
+<b class="nc"><i class="no-highlight">69</i>&nbsp;		else if(index &gt;= 50.0 &amp;&amp; index &lt; 60.0)</b>
+<b class="nc"><i class="no-highlight">70</i>&nbsp;			result = &quot;10th to 12th grade&quot;;</b>
+<b class="nc"><i class="no-highlight">71</i>&nbsp;		else if(index &gt;= 60.0 &amp;&amp; index &lt; 70.0)</b>
+<b class="nc"><i class="no-highlight">72</i>&nbsp;			result = &quot;8th &amp; 9th grade&quot;;</b>
+<b class="nc"><i class="no-highlight">73</i>&nbsp;		else if(index &gt;= 70.0 &amp;&amp; index &lt; 80.0)</b>
+<b class="nc"><i class="no-highlight">74</i>&nbsp;			result = &quot;7th grade&quot;;</b>
+<b class="nc"><i class="no-highlight">75</i>&nbsp;		else if(index &gt;= 80.0 &amp;&amp; index &lt; 90.0)</b>
+<b class="nc"><i class="no-highlight">76</i>&nbsp;			result = &quot;6th grade&quot;;</b>
+<b class="nc"><i class="no-highlight">77</i>&nbsp;		else if(index &gt;= 90.0)</b>
+<b class="nc"><i class="no-highlight">78</i>&nbsp;			result = &quot;5th grade&quot;;</b>
+<b class="nc"><i class="no-highlight">79</i>&nbsp;		return result;</b>
+<i class="no-highlight">80</i>&nbsp;	}
+<i class="no-highlight">81</i>&nbsp;	
+<i class="no-highlight">82</i>&nbsp;	
+<i class="no-highlight">83</i>&nbsp;	
+<i class="no-highlight">84</i>&nbsp;	
+<i class="no-highlight">85</i>&nbsp;	
+<i class="no-highlight">86</i>&nbsp;	
+<i class="no-highlight">87</i>&nbsp;
+<i class="no-highlight">88</i>&nbsp;}
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-03-17 23:13</div>
+</div>
+</body>
+</html>

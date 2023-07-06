@@ -1,0 +1,181 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > listResults</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">views.html</a>
+</div>
+
+<h1>Coverage Summary for Class: listResults (views.html)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+  <tr>
+    <td class="name">listResults$</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/36)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/36)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;@(searchResults:List[model.SearchResult])
+<i class="no-highlight">2</i>&nbsp;
+<i class="no-highlight">3</i>&nbsp;&lt;!DOCTYPE html&gt;
+<i class="no-highlight">4</i>&nbsp;
+<i class="no-highlight">5</i>&nbsp;&lt;html lang=&quot;en&quot;&gt;
+<i class="no-highlight">6</i>&nbsp;    &lt;head&gt;
+<i class="no-highlight">7</i>&nbsp;        @* Here&#39;s where we render the page title `String`. *@
+<i class="no-highlight">8</i>&nbsp;    &lt;title&gt;&quot;Freelancelot&quot;&lt;/title&gt;
+<i class="no-highlight">9</i>&nbsp;    &lt;link rel=&quot;stylesheet&quot; media=&quot;screen&quot; href=&quot;@routes.Assets.versioned(&quot;stylesheets/main.css&quot;)&quot;&gt;
+<i class="no-highlight">10</i>&nbsp;    &lt;link rel=&quot;shortcut icon&quot; type=&quot;image/png&quot; href=&quot;@routes.Assets.versioned(&quot;images/favicon.png&quot;)&quot;&gt;
+<i class="no-highlight">11</i>&nbsp;    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css&quot;&gt;
+<i class="no-highlight">12</i>&nbsp;    &lt;script src=&quot;https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js&quot;&gt;&lt;/script&gt;
+<i class="no-highlight">13</i>&nbsp;    &lt;script src=&quot;https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js&quot;&gt;&lt;/script&gt;
+<i class="no-highlight">14</i>&nbsp;        &lt;!--loader --&gt;
+<i class="no-highlight">15</i>&nbsp;
+<i class="no-highlight">16</i>&nbsp;    &lt;/head&gt;
+<i class="no-highlight">17</i>&nbsp;&lt;body&gt;
+<i class="no-highlight">18</i>&nbsp;&lt;div class=&quot;container&quot;&gt;
+<i class="no-highlight">19</i>&nbsp;    &lt;div class=&quot;jumbotron&quot;&gt;
+<i class="no-highlight">20</i>&nbsp;        &lt;h1 class=&quot;center&quot;&gt;Welcome to Freelancelot!&lt;/h1&gt;
+<i class="no-highlight">21</i>&nbsp;    &lt;/div&gt;
+<i class="no-highlight">22</i>&nbsp;&lt;/div&gt;
+<i class="no-highlight">23</i>&nbsp;&lt;div class=&quot;center&quot;&gt;
+<b class="nc"><i class="no-highlight">24</i>&nbsp;    &lt;input id=&quot;searchTerm&quot; class=&quot;input-lg&quot; type=&quot;text&quot; placeholder=&quot;enter search term(s)&quot;/&gt;</b>
+<i class="no-highlight">25</i>&nbsp;    &lt;button id=&quot;goButton&quot; type=&quot;button&quot; class=&quot;btn btn-info&quot; onclick=&quot;search(@searchResults.length)&quot;&gt;&lt;span class=&quot;glyphicon glyphicon-search&quot;&gt;&lt;/span&gt; Go&lt;/button&gt;
+<i class="no-highlight">26</i>&nbsp;&lt;/div&gt;
+<i class="no-highlight">27</i>&nbsp;&lt;br&gt;&lt;br&gt;&lt;hr&gt;
+<b class="nc"><i class="no-highlight">28</i>&nbsp;</b>
+<i class="no-highlight">29</i>&nbsp;    &lt;div class=&quot;container&quot;&gt;
+<i class="no-highlight">30</i>&nbsp;    @if(searchResults != null) {
+<i class="no-highlight">31</i>&nbsp;
+<b class="nc"><i class="no-highlight">32</i>&nbsp;            @for(searchResult &lt;- searchResults) {</b>
+<b class="nc"><i class="no-highlight">33</i>&nbsp;                &lt;div class=&quot;row justify-content-md-center &quot;&gt;</b>
+<i class="no-highlight">34</i>&nbsp;
+<i class="no-highlight">35</i>&nbsp;                &lt;div class=&quot;col-md-8&quot;&gt;
+<i class="no-highlight">36</i>&nbsp;                 &lt;p&gt; &lt;b&gt; Search terms :  @searchResult.getKeyword&lt;/b&gt; &amp;emsp;&lt;a href=&quot;@routes.FreelancerController.globalWordStatistics(searchResult.getKeyword)&quot; target=&quot;_blank&quot;&gt;Global Stats&lt;/a&gt;
+<b class="nc"><i class="no-highlight">37</i>&nbsp;                  &lt;b&gt;&amp;emsp;&lt;/b&gt;&lt;a href=&quot;@routes.FreelancerController.averageFleschIndex(searchResult.getKeyword)&quot; target=&quot;_blank&quot;&gt; Global Readability&lt;/a&gt;  &lt;/p&gt;</b>
+<b class="nc"><i class="no-highlight">38</i>&nbsp;                  &lt;!-- &lt;p&gt;Total projects fetched: @searchResult.getSizeOfList&lt;/p&gt;--&gt;</b>
+<b class="nc"><i class="no-highlight">39</i>&nbsp;                &lt;/p&gt;</b>
+<b class="nc"><i class="no-highlight">40</i>&nbsp;                   &lt;!-- &lt;p&gt; &lt;b&gt; @searchResult.getKeyword &lt;/b&gt;&lt;/p&gt;--&gt;</b>
+<i class="no-highlight">41</i>&nbsp;                   @for(project &lt;- searchResult.getFirstTenProjectInfo){
+<i class="no-highlight">42</i>&nbsp;                        &lt;p&gt;&lt;b&gt;Owner ID: &lt;/b&gt; @project.getOwnerId  &lt;/b&gt;@project.getTimeSubmitted &lt;/b&gt;&lt;b&gt;Title: &lt;/b&gt;@project.getTitle &lt;/b&gt;&lt;b&gt;Type: &lt;/b&gt;@project.getType &lt;/b&gt;&lt;b&gt;Skills :&lt;/b&gt;
+<i class="no-highlight">43</i>&nbsp;                    @for(skill &lt;- project.getSkills){
+<i class="no-highlight">44</i>&nbsp;                        @*&lt;a href=&quot;&quot; onclick=&quot;displaySkillResults(@skill.getJobID)&quot;&gt;@skill.getSkillName&lt;/a&gt;*@
+<i class="no-highlight">45</i>&nbsp;
+<i class="no-highlight">46</i>&nbsp;                        &lt;a href=&quot;http://localhost:9000/skills/@skill.getSkillName/@skill.getJobID&quot; target=&quot;_blank&quot;&gt;@skill.getSkillName&lt;/a&gt;
+<i class="no-highlight">47</i>&nbsp;
+<i class="no-highlight">48</i>&nbsp;                    }
+<i class="no-highlight">49</i>&nbsp;                   | &lt;a href=&quot;@routes.FreelancerController.individualWordStatistics(searchResult.getKeyword,project.getPreviewDescription)&quot; target=&quot;_blank&quot;&gt; Stats&lt;/a&gt;
+<i class="no-highlight">50</i>&nbsp;                    | &lt;a href=&quot;@routes.FreelancerController.singleReadabilityScore(project.getPreviewDescription)&quot; target=&quot;_blank&quot;&gt; Readability&lt;/a&gt;
+<i class="no-highlight">51</i>&nbsp;                &lt;/p&gt;
+<i class="no-highlight">52</i>&nbsp;
+<i class="no-highlight">53</i>&nbsp;                }
+<i class="no-highlight">54</i>&nbsp;                &lt;/div&gt;
+<b class="nc"><i class="no-highlight">55</i>&nbsp;                &lt;/div&gt;</b>
+<i class="no-highlight">56</i>&nbsp;                &lt;div class=&quot;divider py-1 bg-dark&quot;&gt;&lt;hr class=&quot;mt-5 mb-5&quot;&gt;&lt;/div&gt;
+<i class="no-highlight">57</i>&nbsp;            }
+<i class="no-highlight">58</i>&nbsp;
+<i class="no-highlight">59</i>&nbsp;        }
+<b class="nc"><i class="no-highlight">60</i>&nbsp;    &lt;/div&gt;</b>
+<i class="no-highlight">61</i>&nbsp;
+<b class="nc"><i class="no-highlight">62</i>&nbsp;</b>
+<b class="nc"><i class="no-highlight">63</i>&nbsp;</b>
+<i class="no-highlight">64</i>&nbsp;    &lt;script src=&quot;@routes.Assets.versioned(&quot;javascripts/jquery.js&quot;)&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
+<i class="no-highlight">65</i>&nbsp;    &lt;script src=&quot;@routes.Assets.versioned(&quot;javascripts/freelancelot.js&quot;)&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
+<b class="nc"><i class="no-highlight">66</i>&nbsp;    @*&lt;script src=&quot;https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js&quot;&gt;&lt;/script&gt;*@</b>
+<b class="nc"><i class="no-highlight">67</i>&nbsp;&lt;/body&gt;</b>
+<b class="nc"><i class="no-highlight">68</i>&nbsp;&lt;/html&gt;</b>
+<i class="no-highlight">69</i>&nbsp;
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-03-17 23:13</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,129 @@
+@(nameOfSkill:String,jobIdentifier: String)
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    @* Here's where we render the page title `String`. *@
+    <title>"Freelancelot"</title>
+    <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/main.css")">
+    <!-- <link rel="shortcut icon" type="image/png" href="@routes.Assets.versioned("images/favicon.png")"> -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <!--loader -->
+
+</head>
+<body>
+    <div class="container" id="SkillDetails" >
+
+            <br><br>
+            <p><b> Result for Skill:  @nameOfSkill</b></p>    <!-- This container would be filled by script below -->
+
+
+    </div>
+
+
+<div class="container" id="projectsResult">
+
+    <!-- This container would be filled by script below -->
+</div>
+
+
+<!--<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>-->
+<!--<script src="@routes.Assets.versioned("javascripts/websocket.js")" type="text/javascript"></script> -->
+<script>
+var $projectsResult = $("#projectsResult");
+var $goButton = $("#goButton");
+var $searchTerm = $("#searchTerm");
+var connection = new WebSocket("ws://localhost:9000/websocketSkill");
+
+var globalWordStatisticsUrl = "@routes.WebSocketController.globalWordStatistics("").url";
+var averageFleschIndexUrl = "@routes.WebSocketController.averageFleschIndex("").url";
+var singleReadabilityScoreUrl = "@routes.WebSocketController.singleReadabilityScore("").url";
+var individualWordStatisticsUrl = "@routes.WebSocketController.individualWordStatistics("","").url";
+var searchCount = 0;
+$goButton.prop("disabled", true);
+
+var goButton = function () {
+var text = @jobIdentifier;
+if(searchCount >=10){
+alert("You can only search upto 10 results");
+return;
+}
+searchCount++;
+if(text == ""){
+alert("Please enter some search term to proceed");
+return;
+}
+var search = {
+searchKey : ''
+};
+search.searchKey = text;
+
+connection.send(JSON.stringify(search));
+$searchTerm.val("");
+};
+
+connection.onopen = function () {
+console.log("Connection open");
+
+
+goButton();
+
+
+};
+
+connection.onerror = function (error) {
+console.log('WebSocket Error ', error);
+};
+
+connection.onmessage = function (event) {
+
+var listOfResult = JSON.parse(event.data);
+// iterate array of results
+for (let i = 0; i < Object.keys(listOfResult).length; i++) {
+var globalPreviewDescription ="";
+//console.log("globalPreviewDescription1:"+globalPreviewDescription);
+var keywordId = listOfResult[i]["keyword"].split(' ').join('-');
+
+var toAppend = "";
+//iterate first 10 projects
+toAppend =toAppend+"<div id=\'" + keywordId + "\' class=\'row justify-content-md-center \'><div class=\'col-md-8\'>"
+    var keyword = listOfResult[i]['keyword'];
+    //console.log("@routes.WebSocketController.globalWordStatistics(_)"+{keyword});
+    toAppend =toAppend+"<p><b>Skill Search </b> &nbsp;"
+
+
+    for(let j = 0; j < Object.keys(listOfResult[i]["firstTenProjectInfo"]).length; j++){
+    var ownerId = listOfResult[i]['firstTenProjectInfo'][j]['owner_id'];
+    toAppend =toAppend+"<p><b>Owner ID: </b> "+ownerId+"&nbsp; </b>"+listOfResult[i]['firstTenProjectInfo'][j]['time_submitted']+"</b>&nbsp;<b>Title: </b>"+listOfResult[i]['firstTenProjectInfo'][j]['title']+" </b>&nbsp;<b>Type: </b>"+listOfResult[i]['firstTenProjectInfo'][j]['type']+" </b>&nbsp;<b>Skills :</b>";
+        for(let k = 0; k < Object.keys(listOfResult[i]["firstTenProjectInfo"][j]["jobs"]).length && k<5; k++){
+        var skillName = listOfResult[i]["firstTenProjectInfo"][j]["jobs"][k]["name"];
+        var skillId = listOfResult[i]["firstTenProjectInfo"][j]["jobs"][k]["id"];
+        var skillUrl='http://localhost:9000/skills';
+
+        var fullUrlForSkill =skillUrl+'/'+(skillName.replace('#','%23')).replaceAll(' ','+')+'/'+skillId;
+        toAppend =toAppend+"<a href="+fullUrlForSkill + ">"+ skillName+"</a>&nbsp;";
+
+        }
+    }
+
+
+    toAppend+="</br></div></div>"
+//toAppend.replace(/keywordVar/g,keyword);
+//console.log(toAppend);
+if (document.getElementById(keywordId) == null) {
+$projectsResult.prepend($(toAppend));
+}else{
+document.getElementById(keywordId).innerHTML = toAppend;
+}
+}
+
+
+}
+</script>
+
+<!-- <script src="@routes.Assets.versioned("javascripts/jquery.js")" type="text/javascript"></script> -->
+</body>
+</html>
+

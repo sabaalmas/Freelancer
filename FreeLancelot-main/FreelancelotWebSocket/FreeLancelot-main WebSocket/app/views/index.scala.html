@@ -1,0 +1,140 @@
+@(url: String)
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    @* Here's where we render the page title `String`. *@
+    <title>"Freelancelot"</title>
+    <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/main.css")">
+    <!-- <link rel="shortcut icon" type="image/png" href="@routes.Assets.versioned("images/favicon.png")"> -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <!--loader -->
+
+</head>
+<body>
+<div class="container">
+    <div class="jumbotron">
+        <h1 class="center">Welcome to Freelancelot!</h1>
+    </div>
+</div>
+<div class="center">
+    <input class="input-lg" id="searchTerm" placeholder="enter search term(s)" type="text"/>
+    <button class="btn btn-info" id="goButton" type="button"><span class="glyphicon glyphicon-search"></span> Go
+    </button>
+</div>
+<br><br>
+<hr>
+
+<div class="container" id="projectsResult">
+    <!-- This container would be filled by script below -->
+</div>
+
+
+<!--<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>-->
+<!--<script src="@routes.Assets.versioned("javascripts/websocket.js")" type="text/javascript"></script> -->
+<script>
+var $projectsResult = $("#projectsResult");
+var $goButton = $("#goButton");
+var $searchTerm = $("#searchTerm");
+var connection = new WebSocket("ws://localhost:9000/websocket");
+var globalWordStatisticsUrl = "@routes.WebSocketController.globalWordStatistics("").url";
+var averageFleschIndexUrl = "@routes.WebSocketController.averageFleschIndex("").url";
+var singleReadabilityScoreUrl = "@routes.WebSocketController.singleReadabilityScore("").url";
+var individualWordStatisticsUrl = "@routes.WebSocketController.individualWordStatistics("","").url";
+var userInformationUrl = "@routes.WebSocketController.userInformation("").url";
+var searchCount = 0;
+$goButton.prop("disabled", true);
+
+var goButton = function () {
+var text = $searchTerm.val();
+if(searchCount >=10){
+alert("You can only search upto 10 results");
+return;
+}
+searchCount++;
+if(text == ""){
+alert("Please enter some search term to proceed");
+return;
+}
+var search = {
+searchKey : ''
+};
+search.searchKey = text;
+connection.send(JSON.stringify(search));
+$searchTerm.val("");
+};
+
+connection.onopen = function () {
+console.log("Connection open");
+$goButton.prop("disabled", false);
+$goButton.on('click', goButton);
+$searchTerm.keypress(function (event) {
+var keycode = (event.keyCode ? event.keyCode : event.which);
+if (keycode == '13') {
+goButton();
+}
+});
+};
+
+connection.onerror = function (error) {
+console.log('WebSocket Error ', error);
+};
+
+connection.onmessage = function (event) {
+var listOfResult = JSON.parse(event.data);
+// iterate array of results
+for (let i = 0; i < Object.keys(listOfResult).length; i++) {
+var globalPreviewDescription ="";
+//console.log("globalPreviewDescription1:"+globalPreviewDescription);
+var keywordId = listOfResult[i]["keyword"].split(' ').join('-');
+//iterate 250 projects
+for(let j = 0; j < Object.keys(listOfResult[i]["projectInfo"]).length; j++){
+globalPreviewDescription = globalPreviewDescription +listOfResult[i]["projectInfo"][j]["preview_description"];
+}
+//console.log("globalPreviewDescription2:"+globalPreviewDescription);
+var toAppend = "";
+//iterate first 10 projects
+toAppend =toAppend+"<div id=\'" + keywordId + "\' class=\'row justify-content-md-center \'><div class=\'col-md-8\'>"
+    var keyword = listOfResult[i]['keyword'];
+    //console.log("@routes.WebSocketController.globalWordStatistics(_)"+{keyword});
+    toAppend =toAppend+"<p><b>Search terms : "+keyword+" </b> &nbsp;<a href="+globalWordStatisticsUrl+ encodeURI(keyword) + " target=\'_blank\'>Global Stats</a>"
+        toAppend =toAppend+"<b>&nbsp;</b><a href="+averageFleschIndexUrl+encodeURI(keyword)+" target=\'_blank\'> Global Readability</a>  </p>"
+
+    for(let j = 0; j < Object.keys(listOfResult[i]["firstTenProjectInfo"]).length; j++){
+    var ownerId = listOfResult[i]['firstTenProjectInfo'][j]['owner_id'];
+    toAppend =toAppend+"<p><b>Owner ID: </b> <a href="+userInformationUrl+ownerId+" target=\'_blank\'> "+ownerId+" </a> &nbsp; </b>"+listOfResult[i]['firstTenProjectInfo'][j]['time_submitted']+"</b>&nbsp;<b>Title: </b>"+listOfResult[i]['firstTenProjectInfo'][j]['title']+" </b>&nbsp;<b>Type: </b>"+listOfResult[i]['firstTenProjectInfo'][j]['type']+" </b>&nbsp;<b>Skills :</b>";        for(let k = 0; k < Object.keys(listOfResult[i]["firstTenProjectInfo"][j]["jobs"]).length && k<5; k++){
+            var skillName = listOfResult[i]["firstTenProjectInfo"][j]["jobs"][k]["name"];
+        var skillId = listOfResult[i]["firstTenProjectInfo"][j]["jobs"][k]["id"];
+        var skillUrl='http://localhost:9000/skills';
+        var fullUrlForSkill =skillUrl+'/'+(skillName.replace('#','%23')).replaceAll(' ','+')+'/'+skillId;
+        toAppend =toAppend+"<a href="+fullUrlForSkill + " target=\'_blank\'>"+ skillName+"</a>&nbsp;";
+        }
+        var previewDescription = listOfResult[i]['firstTenProjectInfo'][j]['preview_description'];
+        previewDescription = previewDescription.replaceAll('/','');
+        previewDescription = previewDescription.replaceAll('(','');
+        previewDescription = previewDescription.replaceAll(')','');
+            toAppend =toAppend+"&nbsp;| <a href="+individualWordStatisticsUrl.slice(0, -1)+keywordId+"/"+encodeURI(previewDescription.trim())+" target=\'_blank\'> Stats</a>"
+        toAppend =toAppend+"&nbsp;| <a href="+singleReadabilityScoreUrl+encodeURI(previewDescription.trim())+" target=\'_blank\'> Readability</a></p>"
+    }
+
+
+    toAppend+="</br></div></div>"
+//toAppend.replace(/keywordVar/g,keyword);
+//console.log(toAppend);
+if (document.getElementById(keywordId) == null) {
+$projectsResult.prepend($(toAppend));
+}else{
+document.getElementById(keywordId).innerHTML = toAppend;
+}
+}
+
+
+}
+</script>
+
+<!-- <script src="@routes.Assets.versioned("javascripts/jquery.js")" type="text/javascript"></script> -->
+</body>
+</html>
+
